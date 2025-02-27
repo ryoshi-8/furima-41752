@@ -12,7 +12,9 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :product_name
     validates :description
-    validates :price
+    validates :price,
+              numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000,
+                              message: '300から9999999の間の半角数値を使用してください' }
   end
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
