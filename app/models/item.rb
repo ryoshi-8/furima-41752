@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :days_until_ship
 
   with_options presence: true do
+    validates :image
     validates :product_name
     validates :description
     validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
@@ -19,6 +20,6 @@ class Item < ApplicationRecord
     validates :days_until_ship_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :price,
               numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000,
-                              message: '300から9999999の間の半角数値を使用してください' }
+                              message: 'は300から9999999の間の半角数値を使用してください' }
   end
 end
