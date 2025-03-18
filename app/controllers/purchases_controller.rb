@@ -5,7 +5,9 @@ class PurchasesController < ApplicationController
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
     @purchase_destination = PurchaseDestination.new
-    redirect_to root_path if current_user.id == @item.user_id
+    return unless (current_user.id == @item.user_id) || (current_user.id != @item.user_id && @item.purchase.present?)
+
+    redirect_to root_path
   end
 
   def create
